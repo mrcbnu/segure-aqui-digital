@@ -14,6 +14,35 @@ import {
   Quote,
 } from "lucide-react";
 
+const SITE_URL = "https://segureaqui.com.br";
+
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "InsuranceAgency",
+  name: "Segure Aqui",
+  description:
+    "Corretora de seguros consultiva especializada em Auto, Vida, Residencial e Empresarial, com atendimento personalizado e expertise em sinistros.",
+  url: SITE_URL,
+  telephone: "+55-11-99999-9999",
+  email: "contato@segureaqui.com.br",
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Av. Paulista, 1000",
+    addressLocality: "São Paulo",
+    addressRegion: "SP",
+    addressCountry: "BR",
+  },
+  areaServed: { "@type": "Country", name: "Brasil" },
+  sameAs: [] as string[],
+  makesOffer: [
+    { "@type": "Offer", name: "Seguro Auto" },
+    { "@type": "Offer", name: "Seguro de Vida" },
+    { "@type": "Offer", name: "Seguro Residencial" },
+    { "@type": "Offer", name: "Seguro Empresarial" },
+  ],
+};
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -23,11 +52,35 @@ export const Route = createFileRoute("/")({
         content:
           "Segure Aqui: corretora de seguros moderna e consultiva. Auto, Vida, Residencial e Empresarial com atendimento personalizado e expertise em sinistros.",
       },
+      { name: "keywords", content: "seguro auto, seguro de vida, seguro residencial, seguro empresarial, corretora de seguros, Segure Aqui" },
+      { name: "robots", content: "index, follow" },
+      { name: "author", content: "Segure Aqui" },
+      { name: "theme-color", content: "#002147" },
+
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Segure Aqui" },
+      { property: "og:locale", content: "pt_BR" },
+      { property: "og:url", content: SITE_URL },
       { property: "og:title", content: "Segure Aqui | Tranquilidade é planejamento" },
       {
         property: "og:description",
         content:
-          "Especialistas em desmistificar seguros. Fale com um consultor agora pelo WhatsApp.",
+          "Especialistas em desmistificar seguros. Auto, Vida, Residencial e Empresarial com atendimento consultivo. Fale com um consultor agora pelo WhatsApp.",
+      },
+
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Segure Aqui | Tranquilidade é planejamento" },
+      {
+        name: "twitter:description",
+        content:
+          "Corretora consultiva em Auto, Vida, Residencial e Empresarial. Atendimento humano e suporte completo em sinistros.",
+      },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(localBusinessJsonLd),
       },
     ],
   }),
