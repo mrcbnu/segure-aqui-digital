@@ -1,18 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
+import React, { useState, useEffect } from "react";
 import {
   Car,
   HeartPulse,
   Home,
+  Building,
   Building2,
   ShieldCheck,
   Headphones,
+  Instagram,
   FileCheck2,
   MessageCircle,
   Phone,
   Mail,
   MapPin,
   Quote,
+  Plane,
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const SITE_URL = "https://segureaqui.com.br";
 
@@ -46,7 +56,7 @@ const localBusinessJsonLd = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Segure Aqui | Corretora de Seguros Consultiva" },
+      { title: "Segure Aqui | Corretora de Seguros" },
       {
         name: "description",
         content:
@@ -88,48 +98,81 @@ export const Route = createFileRoute("/")({
 });
 
 const WHATSAPP_URL =
-  "https://wa.me/5511999999999?text=Ol%C3%A1%21%20Quero%20falar%20com%20um%20consultor%20da%20Segure%20Aqui.";
+  "https://wa.me/5547999534266?text=Ol%C3%A1%21%20Quero%20falar%20com%20um%20consultor%20da%20Segure%20Aqui.";
 
 function Logo({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground">
-        <ShieldCheck className="h-5 w-5" strokeWidth={2.2} />
-      </div>
-      <span className="text-lg font-bold tracking-tight">
-        Segure<span className="font-light">Aqui</span>
-      </span>
+      {/* Aqui carregamos a sua imagem da pasta public */}
+      <img 
+        src="/logo.png" 
+        alt="Segure Aqui Digital" 
+        className="h-15 w-auto object-contain" 
+        // A altura (h-10) pode ser ajustada conforme o formato da sua logo
+      />
     </div>
   );
 }
 
 function Nav() {
   return (
-    <header className="absolute inset-x-0 top-0 z-20">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 text-primary-foreground">
-        <Logo />
-        <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
-          <a href="#servicos" className="opacity-80 hover:opacity-100">Seguros</a>
-          <a href="#diferencial" className="opacity-80 hover:opacity-100">Diferencial</a>
-          <a href="#depoimentos" className="opacity-80 hover:opacity-100">Clientes</a>
-          <a href="#contato" className="opacity-80 hover:opacity-100">Contato</a>
-        </nav>
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="hidden rounded-full bg-primary-foreground px-5 py-2 text-sm font-semibold text-primary transition hover:scale-[1.02] md:inline-flex"
-        >
-          WhatsApp
+    <header className="fixed top-0 left-0 right-0 z-[100] w-full border-b border-white/10 bg-primary/90 backdrop-blur-md transition-all">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        {/* Lado Esquerdo: Logo */}
+        <a href="/" className="transition-hover hover:opacity-90">
+          <Logo className="text-white" />
         </a>
+
+        {/* Centro: Navegação */}
+        <nav className="hidden items-center gap-8 text-sm font-medium text-white/80 md:flex">
+          <a href="#servicos" className="transition-colors hover:text-accent">Seguros</a>
+          <a href="#diferencial" className="transition-colors hover:text-accent">Diferencial</a>
+          <a href="#depoimentos" className="transition-colors hover:text-accent">Depoimentos</a>
+          <a href="#faq" className="transition-colors hover:text-accent">Dúvidas</a>
+        </nav>
+
+        {/* Lado Direito: Botão de Ação */}
+        <div className="flex items-center gap-4">
+          <a 
+            href={WHATSAPP_URL} 
+            target="_blank" 
+            rel="noreferrer"
+            className="hidden rounded-full bg-accent px-5 py-2 text-sm font-semibold text-primary transition hover:scale-105 md:block"
+          >
+            Cotação Rápida
+          </a>
+          
+          {/* Menu Mobile (Ícone para celulares) */}
+          <button className="text-white md:hidden">
+            <span className="sr-only">Abrir menu</span>
+            {/* Você pode usar o ícone Menu do Lucide aqui */}
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
       </div>
     </header>
   );
 }
 
-function Hero() {
+function Hero() {   
+  
+  // Lista das suas imagens (coloque os nomes corretos dos arquivos na pasta public)
+  const TOTAL_IMAGENS = 6;
+  const images = Array.from({ length: TOTAL_IMAGENS }, (_, i) => `/banner/banner-${i + 1}.png`);    
+
+  const [currentImg, setCurrentImg] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImg((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
   return (
-    <section className="relative overflow-hidden bg-gradient-hero text-primary-foreground">
+    <section className="relative overflow-hidden bg-gradient-hero pt-1 pb-24 text-white md:pt-1">
       <Nav />
       <div
         aria-hidden
@@ -142,7 +185,7 @@ function Hero() {
         style={{ background: "radial-gradient(closest-side, white, transparent)" }}
       />
 
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 px-6 pb-28 pt-40 lg:grid-cols-12 lg:pb-36 lg:pt-44">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 px-6 pb-10 pt-20 lg:grid-cols-12 lg:pb-2 lg:pt-28">
         <div className="lg:col-span-7">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.78_0.15_150)]" />
@@ -173,25 +216,10 @@ function Hero() {
             >
               Conheça nossas soluções →
             </a>
-          </div>
-
-          <div className="mt-16 grid max-w-lg grid-cols-3 gap-6 border-t border-white/10 pt-8 text-sm">
-            <div>
-              <div className="text-2xl font-bold">+15</div>
-              <div className="mt-1 text-xs text-white/60">anos de mercado</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">+30</div>
-              <div className="mt-1 text-xs text-white/60">seguradoras parceiras</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">98%</div>
-              <div className="mt-1 text-xs text-white/60">sinistros aprovados</div>
-            </div>
-          </div>
+          </div>          
         </div>
-
-        <div className="hidden lg:col-span-5 lg:block">
+        <div className="hidden lg:col-span-5 lg:flex lg:flex-col lg:gap-6">
+          {/* CARD 1 */}
           <div className="relative">
             <div className="absolute inset-0 -rotate-3 rounded-3xl bg-white/5 backdrop-blur" />
             <div className="relative rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
@@ -201,7 +229,7 @@ function Hero() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold">Análise personalizada</div>
-                  <div className="text-xs text-white/60">Resposta em até 2h úteis</div>
+                  <div className="text-xs text-white/60">Resposta rápida e humanizada</div>
                 </div>
               </div>
               <ul className="mt-6 space-y-4 text-sm">
@@ -219,6 +247,74 @@ function Hero() {
               </ul>
             </div>
           </div>
+
+          {/* CARD 2 - IMAGENS */}          
+          <div className="relative h-72 w-full overflow-hidden rounded-3xl border border-white/20 bg-white/10 backdrop-blur-md">
+            {images.map((img, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  index === currentImg ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <img
+                  src={img}
+                  alt="Seguros"
+                  className="h-full w-full object-cover transition-transform duration-[5000ms] ease-linear"
+                  style={{ transform: index === currentImg ? 'scale(1.1)' : 'scale(1)' }}
+                />
+                {/* Overlay opcional para garantir que o card combine com o estilo escuro */}
+                <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent" />
+              </div>
+            ))}
+            
+            {/* Indicador visual (opcional - as bolinhas lá embaixo) */}
+            <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
+              {images.map((_, index) => (
+                <div
+                  key={index}
+                  className={`h-1 w-4 rounded-full transition-all ${
+                    index === currentImg ? "bg-accent" : "bg-white/20"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </section>
+  );
+}
+
+function Partners() {
+  const partners = [
+    { name: "Porto Seguro", logo: "/porto.png" },
+    { name: "Bradesco Seguros", logo: "/bradesco.png" },
+    { name: "Yelum", logo: "/yelum.png" },
+    { name: "SulAmérica", logo: "/sulamerica.png" },
+    { name: "Tokio Marine", logo: "/tokio.png" },
+    { name: "Allianz", logo: "/allianz.png" },
+    { name: "HDI", logo: "/hdi.png" },
+  ];
+
+  return (
+    <section className="bg-slate-50/50 py-10 border-b border-slate-100">
+      <div className="mx-auto max-w-7xl px-6">
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-10">
+          Trabalhamos com as melhores <span className="text-primary">seguradoras do mercado</span>
+        </p>
+        
+        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60">
+          {partners.map((partner) => (
+            <img
+              key={partner.name}
+              src={partner.logo}
+              alt={partner.name}
+              title={partner.name}
+              className="h-8 w-auto grayscale transition-all duration-300 hover:grayscale-0 hover:scale-110 object-contain"
+            />
+          ))}
         </div>
       </div>
     </section>
@@ -250,6 +346,18 @@ const services = [
     blurb:
       "Continuidade do seu negócio assegurada: patrimônio, responsabilidade civil e equipe sempre cobertos.",
   },
+  {
+    icon: Plane,
+    title: "Seguro Viagem",
+    blurb:
+      "Viaje com tranquilidade sabendo que tem suporte médico e assistência completa em qualquer lugar do mundo.",
+  },
+  {
+    icon: Building,
+    title: "Seguro Condomínio",
+    blurb:
+      "Proteção completa para áreas comuns, funcionários e responsabilidade civil do síndico. Segurança para o patrimônio de todos.",
+  },
 ];
 
 function Services() {
@@ -269,7 +377,7 @@ function Services() {
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map(({ icon: Icon, title, blurb }) => (
             <article
               key={title}
@@ -393,16 +501,7 @@ const testimonials = [
   },
 ];
 
-const partners = [
-  "Porto Seguro",
-  "Bradesco Seguros",
-  "SulAmérica",
-  "Allianz",
-  "Mapfre",
-  "Tokio Marine",
-  "HDI",
-  "Liberty",
-];
+
 
 function SocialProof() {
   return (
@@ -433,22 +532,6 @@ function SocialProof() {
               </figcaption>
             </figure>
           ))}
-        </div>
-
-        <div className="mt-24">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-            Seguradoras parceiras
-          </p>
-          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-8">
-            {partners.map((p) => (
-              <div
-                key={p}
-                className="flex h-16 items-center justify-center rounded-lg border border-border bg-card text-xs font-semibold tracking-wide text-muted-foreground transition hover:border-accent hover:text-primary"
-              >
-                {p}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
@@ -486,7 +569,52 @@ function CTASection() {
     </section>
   );
 }
+function FAQ() {
+  const faqs = [
+    {
+      question: "Como funciona a consultoria da Segure Aqui?",
+      answer: "Nós não apenas vendemos apólices. Analisamos seu perfil de risco, comparamos as melhores seguradoras do mercado e explicamos cada cláusula para que você saiba exatamente o que está contratando."
+    },
+    {
+      question: "O que fazer em caso de sinistro?",
+      answer: "Você não está sozinho. Em caso de imprevisto, entre em contato conosco imediatamente. Nossa equipe técnica cuida de toda a burocracia e acompanhamento junto à seguradora para garantir sua indenização."
+    },
+    {
+      question: "O atendimento é apenas digital ou presencial?",
+      answer: "Atendemos de forma híbrida! Temos a agilidade do digital via WhatsApp e vídeo-chamada, mas também oferecemos consultoria presencial para casos específicos ou seguros empresariais complexos."
+    },
+    {
+      question: "Quais seguradoras são parceiras da Segure Aqui?",
+      answer: "Trabalhamos com as maiores e mais sólidas seguradoras do Brasil, como Porto Seguro, Azul, Liberty, SulAmérica, Bradesco e Tokyo Marine."
+    }
+  ];
 
+  return (
+    <section id="faq" className="py-24 bg-white">
+      <div className="mx-auto max-w-3xl px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-light text-primary md:text-4xl">
+            Dúvidas <span className="font-bold">Frequentes</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground">Tudo o que você precisa saber para contratar com segurança.</p>
+        </div>
+
+        <Accordion type="single" collapsible className="w-full">
+          {faqs.map((faq, index) => (
+            <AccordionItem key={index} value={`item-${index}`} className="border-slate-200">
+              <AccordionTrigger className="text-left text-primary hover:text-accent transition-colors font-medium">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground leading-relaxed">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  );
+}
 function Footer() {
   return (
     <footer id="contato" className="bg-primary text-primary-foreground">
@@ -505,19 +633,30 @@ function Footer() {
           <h4 className="text-xs font-semibold uppercase tracking-[0.25em] text-white/60">
             Contato
           </h4>
-          <ul className="mt-5 space-y-3 text-sm text-white/85">
+          <ul className="mt-5 space-y-4 text-sm text-white/85">
             <li className="flex items-center gap-3">
               <Phone className="h-4 w-4 text-accent" />
-              (11) 99999-9999
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
+                (47) 99953-4266
+              </a>
+            </li>
+            <li className="flex items-center gap-3">
+              <Instagram className="h-4 w-4 text-accent" />
+              <a 
+                href="https://instagram.com/segure_aqui" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="hover:text-accent transition-colors"
+              >
+                @segure_aqui
+              </a>
             </li>
             <li className="flex items-center gap-3">
               <Mail className="h-4 w-4 text-accent" />
-              contato@segureaqui.com.br
-            </li>
-            <li className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-4 w-4 flex-none text-accent" />
-              Av. Paulista, 1000 — São Paulo / SP
-            </li>
+              <a href="mailto:contato@segureaqui.com.br" className="hover:text-accent transition-colors">
+                contato@segureaqui.com.br
+              </a>
+            </li>            
           </ul>
         </div>
 
@@ -540,7 +679,7 @@ function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 py-8 text-xs text-white/50 md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} Segure Aqui. Todos os direitos reservados. SUSEP nº 0000000.</p>
+          <p>© {new Date().getFullYear()} Segure Aqui. Todos os direitos reservados. </p>
           <div className="ml-auto">
             <Logo className="text-primary-foreground" />
           </div>
@@ -553,22 +692,42 @@ function Footer() {
 function Index() {
   return (
     <main className="min-h-screen bg-background font-sans text-foreground">
-      <Hero />
-      <Services />
+      <Hero />      
+      <Partners />
+      <Services />      
       <Differential />
       <SocialProof />
+      <FAQ />
       <CTASection />
       <Footer />
 
+      {/* Personagem do WhatsApp */}
+      {/* Personagem do WhatsApp - Sem fundo circular */}
       <a
         href={WHATSAPP_URL}
         target="_blank"
         rel="noreferrer"
-        aria-label="Falar no WhatsApp"
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-elegant transition hover:scale-110"
-        style={{ backgroundColor: "oklch(0.68 0.16 150)" }}
+        aria-label="Falar com nossa consultora"
+        className="fixed bottom-0 right-4 z-50 group flex flex-col items-center"
       >
-        <MessageCircle className="h-7 w-7" />
+        {/* Balão de fala melhorado */}
+        <span className="mb-2 scale-0 rounded-2xl bg-white px-4 py-2 text-xs font-bold text-primary shadow-2xl transition-all duration-300 group-hover:scale-100 group-hover:-translate-y-2">
+          Posso te ajudar? 🚀
+        </span>
+
+        <div className="relative w-32 md:w-40 transition-transform duration-300 hover:scale-105 active:scale-95">
+          {/* A imagem agora aparece inteira, alinhada ao fundo da tela */}
+          <img 
+            src="/je_6.png" 
+            alt="Consultora Segure Aqui" 
+            className="h-auto w-full object-contain"
+          />
+          
+          {/* Badge do WhatsApp flutuando ao lado da personagem */}
+          <div className="absolute bottom-10 right-0 flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg animate-bounce">
+            <MessageCircle className="h-6 w-6" />
+          </div>
+        </div>
       </a>
     </main>
   );
