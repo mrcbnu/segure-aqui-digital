@@ -1,98 +1,107 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Calendar, Clock, ChevronRight } from "lucide-react";
-
-// Exemplo de dados dos posts (Isto depois pode vir de um CMS ou ficheiro JSON)
-const POSTS = [
-  {
-    id: "seguro-auto-mais-barato",
-    title: "5 dicas infalíveis para reduzir o preço do seu Seguro Auto",
-    excerpt: "Saiba como o seu perfil e as coberturas escolhidas influenciam diretamente no valor final da sua apólice.",
-    category: "Seguro Auto",
-    date: "15 Mai, 2024",
-    readTime: "5 min",
-    image: "/banner/1.jpg", // Usa as fotos que já tens na pasta banner
-  },
-  {
-    id: "importancia-seguro-vida",
-    title: "Seguro de Vida: Porquê é o melhor investimento para a sua família",
-    excerpt: "Muito além da cobertura de óbito, entenda como as coberturas em vida protegem o seu património.",
-    category: "Planeamento",
-    date: "10 Mai, 2024",
-    readTime: "7 min",
-    image: "/banner/2.jpg",
-  }
-];
+import { Calendar, Clock, ArrowRight, FileText } from "lucide-react";
+import { BLOG_POSTS } from "@/data/posts";
 
 export const Route = createFileRoute("/blog/")({
-  component: BlogList,
+  component: BlogPage,
 });
 
-function BlogList() {
-  return (
-    <main className="min-h-screen bg-background pt-24">
-      {/* Header do Blog */}
-      <section className="px-6 py-16 text-center">
-        <div className="mx-auto max-w-3xl">
-          <h1 className="text-4xl font-bold tracking-tight text-primary md:text-6xl">
-            Blog <span className="text-accent">Segure Aqui</span>
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
-            Conteúdo especializado para te ajudar a proteger o que mais importa com inteligência.
-          </p>
-        </div>
-      </section>
+function BlogPage() {
+  // Separa os 3 primeiros posts para o destaque e o resto para a lista
+  const featuredPosts = BLOG_POSTS.slice(0, 3);
+  const olderPosts = BLOG_POSTS.slice(3);
 
-      {/* Grelha de Artigos */}
-      <section className="mx-auto max-w-7xl px-6 pb-24">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {POSTS.map((post) => (
+  return (
+    <main className="min-h-screen bg-slate-50 pt-32 pb-24">
+      <div className="mx-auto max-w-7xl px-6">
+        
+        {/* Cabeçalho */}
+        <div className="mb-16 text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            Conteúdo Especializado
+          </span>
+          <h1 className="mt-4 text-4xl font-bold tracking-tight text-primary md:text-6xl">
+            Blog Segure Aqui
+          </h1>
+        </div>
+
+        {/* SEÇÃO 1: OS 3 GRANDES DESTAQUES */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3 mb-20">
+          {featuredPosts.map((post) => (
             <Link
               key={post.id}
               to="/blog/$postId"
               params={{ postId: post.id }}
-              className="group relative flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white transition-all hover:-translate-y-2 hover:shadow-2xl"
+              className="group flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white transition-all hover:-translate-y-2 hover:shadow-xl"
             >
-              {/* Imagem do Post */}
-              <div className="relative h-52 w-full overflow-hidden">
+              <div className="relative h-56 w-full overflow-hidden bg-slate-100">
                 <img
                   src={post.image}
                   alt={post.title}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute left-4 top-4 rounded-full bg-accent/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary backdrop-blur-sm">
-                  {post.category}
+                <div className="absolute left-4 top-4 rounded-full bg-primary/90 px-3 py-1 text-[10px] font-bold uppercase text-white backdrop-blur-sm">
+                  Destaque
                 </div>
               </div>
-
-              {/* Conteúdo do Card */}
               <div className="flex flex-1 flex-col p-6">
-                <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-3 w-3" /> {post.date}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="h-3 w-3" /> {post.readTime}
-                  </span>
-                </div>
-                
-                <h3 className="mt-4 text-xl font-bold leading-tight text-primary transition-colors group-hover:text-accent">
+                <h2 className="text-xl font-bold leading-tight text-primary group-hover:text-accent transition-colors line-clamp-2">
                   {post.title}
-                </h3>
-                
-                <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                </h2>
+                <p className="mt-3 line-clamp-2 text-sm text-muted-foreground italic">
                   {post.excerpt}
                 </p>
-
-                <div className="mt-auto pt-6">
-                  <span className="flex items-center gap-2 text-sm font-bold text-primary">
-                    Ler artigo completo <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
+                <div className="mt-auto pt-4 flex items-center gap-2 text-xs font-bold text-primary">
+                  Ler Agora <ArrowRight className="h-3 w-3" />
                 </div>
               </div>
             </Link>
           ))}
         </div>
-      </section>
+
+        {/* SEÇÃO 2: RESTANTE EM LISTA (Se houver mais de 3) */}
+        {olderPosts.length > 0 && (
+          <div className="max-w-4xl mx-auto">
+            <h3 className="flex items-center gap-2 text-lg font-bold text-primary mb-8 border-b pb-4">
+              <FileText className="text-accent" size={20} />
+              Artigos Anteriores
+            </h3>
+            
+            <div className="space-y-4">
+              {olderPosts.map((post) => (
+                <Link
+                  key={post.id}
+                  to="/blog/$postId"
+                  params={{ postId: post.id }}
+                  className="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-100 hover:border-accent/30 hover:shadow-md transition-all group"
+                >
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1">
+                      {post.category}
+                    </span>
+                    <h4 className="font-bold text-primary group-hover:text-accent transition-colors">
+                      {post.title}
+                    </h4>
+                    <span className="text-[10px] text-muted-foreground mt-1">
+                      {post.date} • {post.readTime} de leitura
+                    </span>
+                  </div>
+                  <div className="h-10 w-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition-colors">
+                    <ArrowRight size={18} />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Caso não tenha posts */}
+        {BLOG_POSTS.length === 0 && (
+          <div className="text-center py-20 text-slate-400">
+            Em breve, novos conteúdos para você.
+          </div>
+        )}
+      </div>
     </main>
   );
 }

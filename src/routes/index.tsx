@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 import React, { useState, useEffect } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   Car,
   HeartPulse,
@@ -31,16 +34,16 @@ const localBusinessJsonLd = {
   "@type": "InsuranceAgency",
   name: "Segure Aqui",
   description:
-    "Corretora de seguros consultiva especializada em Auto, Vida, Residencial e Empresarial, com atendimento personalizado e expertise em sinistros.",
+    "Corretora de seguros especializada em Auto, Vida, Residencial e Empresarial, com atendimento personalizado e expertise em sinistros.",
   url: SITE_URL,
-  telephone: "+55-11-99999-9999",
+  telephone: "+55-47-99953-4266",
   email: "contato@segureaqui.com.br",
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Av. Paulista, 1000",
-    addressLocality: "São Paulo",
-    addressRegion: "SP",
+    streetAddress: "Rua Norberto Acheterberg, 251 - Salto Weissbach",
+    addressLocality: "Blumenau",
+    addressRegion: "SC",
     addressCountry: "BR",
   },
   areaServed: { "@type": "Country", name: "Brasil" },
@@ -60,7 +63,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Segure Aqui: corretora de seguros moderna e consultiva. Auto, Vida, Residencial e Empresarial com atendimento personalizado e expertise em sinistros.",
+          "Segure Aqui: corretora de seguros moderna. Auto, Vida, Residencial e Empresarial com atendimento personalizado e expertise em sinistros.",
       },
       { name: "keywords", content: "seguro auto, seguro de vida, seguro residencial, seguro empresarial, corretora de seguros, Segure Aqui" },
       { name: "robots", content: "index, follow" },
@@ -100,62 +103,6 @@ export const Route = createFileRoute("/")({
 const WHATSAPP_URL =
   "https://wa.me/5547999534266?text=Ol%C3%A1%21%20Quero%20falar%20com%20um%20consultor%20da%20Segure%20Aqui.";
 
-function Logo({ className = "" }: { className?: string }) {
-  return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      {/* Aqui carregamos a sua imagem da pasta public */}
-      <img 
-        src="/logo.png" 
-        alt="Segure Aqui Digital" 
-        className="h-15 w-auto object-contain" 
-        // A altura (h-10) pode ser ajustada conforme o formato da sua logo
-      />
-    </div>
-  );
-}
-
-function Nav() {
-  return (
-    <header className="fixed top-0 left-0 right-0 z-[100] w-full border-b border-white/10 bg-primary/90 backdrop-blur-md transition-all">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        {/* Lado Esquerdo: Logo */}
-        <a href="/" className="transition-hover hover:opacity-90">
-          <Logo className="text-white" />
-        </a>
-
-        {/* Centro: Navegação */}
-        <nav className="hidden items-center gap-8 text-sm font-medium text-white/80 md:flex">
-          <a href="#servicos" className="transition-colors hover:text-accent">Seguros</a>
-          <a href="#diferencial" className="transition-colors hover:text-accent">Diferencial</a>
-          <a href="#depoimentos" className="transition-colors hover:text-accent">Depoimentos</a>
-          <a href="#faq" className="transition-colors hover:text-accent">Dúvidas</a>
-        </nav>
-
-        {/* Lado Direito: Botão de Ação */}
-        <div className="flex items-center gap-4">
-          <a 
-            href={WHATSAPP_URL} 
-            target="_blank" 
-            rel="noreferrer"
-            className="hidden rounded-full bg-accent px-5 py-2 text-sm font-semibold text-primary transition hover:scale-105 md:block"
-          >
-            Cotação Rápida
-          </a>
-          
-          {/* Menu Mobile (Ícone para celulares) */}
-          <button className="text-white md:hidden">
-            <span className="sr-only">Abrir menu</span>
-            {/* Você pode usar o ícone Menu do Lucide aqui */}
-            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </header>
-  );
-}
-
 function Hero() {   
   
   // Lista das suas imagens (coloque os nomes corretos dos arquivos na pasta public)
@@ -173,7 +120,7 @@ function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-gradient-hero pt-1 pb-24 text-white md:pt-1">
-      <Nav />
+     
       <div
         aria-hidden
         className="pointer-events-none absolute -right-32 -top-32 h-[520px] w-[520px] rounded-full opacity-20 blur-3xl"
@@ -189,16 +136,16 @@ function Hero() {
         <div className="lg:col-span-7">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.78_0.15_150)]" />
-            Corretora consultiva
+            Corretora de seguros
           </span>
           <h1 className="mt-8 text-5xl font-light leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-            Sua tranquilidade não é por acaso,{" "}
-            <span className="font-bold">é planejamento.</span>
+            Segurança planejada,{" "}
+            <span className="font-bold">tranquilidade garantida.</span>
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/75 md:text-xl">
-            Somos especialistas em desmistificar seguros. Traduzimos apólices em
-            decisões claras para proteger o que realmente importa para você e
-            sua família.
+            Somos especialistas em desmistificar seguros. Traduzimos apólices com orientação e sem complicação
+            para proteger o que mais importa para você e sua família.
+            Mais que seguros, entregamos confiança.
           </p>
           <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
             <a
@@ -229,12 +176,12 @@ function Hero() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold">Análise personalizada</div>
-                  <div className="text-xs text-white/60">Resposta rápida e humanizada</div>
+                  <div className="text-xs text-white/60">Atendimento rápido e humanizado</div>
                 </div>
               </div>
               <ul className="mt-6 space-y-4 text-sm">
                 {[
-                  "Diagnóstico do seu perfil de risco",
+                  "Análise de risco",
                   "Comparativo entre seguradoras",
                   "Apólice na medida do seu orçamento",
                   "Suporte humano em todo o sinistro",
@@ -249,7 +196,10 @@ function Hero() {
           </div>
 
           {/* CARD 2 - IMAGENS */}          
-          <div className="relative h-72 w-full overflow-hidden rounded-3xl border border-white/20 bg-white/10 backdrop-blur-md">
+          <a 
+            href="#servicos" 
+            className="relative block h-72 w-full overflow-hidden rounded-3xl border border-white/20 bg-white/10 backdrop-blur-md group cursor-pointer transition-all hover:border-accent/50 shadow-2xl"
+          >
             {images.map((img, index) => (
               <div
                 key={index}
@@ -263,12 +213,20 @@ function Hero() {
                   className="h-full w-full object-cover transition-transform duration-[5000ms] ease-linear"
                   style={{ transform: index === currentImg ? 'scale(1.1)' : 'scale(1)' }}
                 />
-                {/* Overlay opcional para garantir que o card combine com o estilo escuro */}
-                <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent" />
+                
+                {/* Overlay que escurece levemente no hover para destacar que é um link */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent transition-opacity group-hover:from-black/40" />
+                
+                {/* Texto indicativo que aparece no hover (opcional) */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-primary/20 backdrop-blur-[2px]">
+                  <span className="bg-accent text-primary px-4 py-2 rounded-full text-xs font-bold shadow-lg">
+                    Ver Serviços
+                  </span>
+                </div>
               </div>
             ))}
             
-            {/* Indicador visual (opcional - as bolinhas lá embaixo) */}
+            {/* Indicador visual (as bolinhas) */}
             <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
               {images.map((_, index) => (
                 <div
@@ -279,7 +237,7 @@ function Hero() {
                 />
               ))}
             </div>
-          </div>
+          </a>
         </div>
       </div>
       
@@ -332,13 +290,13 @@ const services = [
     icon: HeartPulse,
     title: "Seguro de Vida",
     blurb:
-      "Garanta o futuro de quem você ama com uma apólice clara, flexível e pensada para cada fase da vida.",
+      "Cuidado que acompanha você em todos os momentos.",
   },
   {
     icon: Home,
     title: "Seguro Residencial",
     blurb:
-      "Sua casa protegida contra imprevistos — de incêndio a danos elétricos — com indenização rápida e justa.",
+      "Sua casa protegida contra imprevistos, com coberturas personalizadas e assistência 24h.",
   },
   {
     icon: Building2,
@@ -372,7 +330,7 @@ function Services() {
             Seguros pensados para <span className="font-bold">cada momento</span>.
           </h2>
           <p className="mt-5 text-base text-muted-foreground">
-            Selecionamos as melhores coberturas do mercado e ajustamos cada
+            Selecionamos as melhores coberturas do mercado e personalizamos cada
             detalhe ao que faz sentido para a sua realidade.
           </p>
         </div>
@@ -410,12 +368,12 @@ const differentials = [
   {
     icon: Headphones,
     title: "Atendimento personalizado",
-    text: "Um consultor dedicado que conhece sua história — sem call centers, sem roteiros prontos.",
+    text: "Um consultor dedicado para orientar, analisar as necessidades, sem roteiros prontos.",
   },
   {
     icon: ShieldCheck,
     title: "Expertise em pós-venda",
-    text: "Acompanhamos cada renovação, reajuste e mudança de cenário ao longo de toda a apólice.",
+    text: "Acompanhamento da jornada de ponta a ponta, da contratação à renovação da apólice.",
   },
   {
     icon: FileCheck2,
@@ -443,7 +401,7 @@ function Differential() {
           </h2>
           <p className="mt-6 text-base leading-relaxed text-white/70">
             Acreditamos que um seguro só cumpre seu papel quando você precisa
-            dele. Por isso, nosso compromisso vai muito além da assinatura da
+            dele. Por isso, nosso compromisso vai muito além da contratação da
             apólice — estamos com você no momento mais importante.
           </p>
           <a
@@ -538,54 +496,24 @@ function SocialProof() {
   );
 }
 
-function CTASection() {
-  return (
-    <section className="bg-background py-24">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-hero px-10 py-16 text-center text-primary-foreground shadow-elegant md:px-16">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full opacity-20 blur-3xl"
-            style={{ background: "radial-gradient(closest-side, white, transparent)" }}
-          />
-          <h2 className="text-3xl font-light tracking-tight md:text-4xl">
-            Pronto para uma <span className="font-bold">conversa sem pressa</span>?
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-base text-white/75">
-            Em poucos minutos você recebe um diagnóstico personalizado e descobre
-            qual proteção realmente faz sentido para você.
-          </p>
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-10 inline-flex items-center gap-3 rounded-full bg-primary-foreground px-8 py-4 text-sm font-semibold text-primary transition hover:scale-[1.02]"
-          >
-            <MessageCircle className="h-5 w-5" />
-            Falar com um Consultor Agora
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
+
 function FAQ() {
   const faqs = [
     {
       question: "Como funciona a consultoria da Segure Aqui?",
-      answer: "Nós não apenas vendemos apólices. Analisamos seu perfil de risco, comparamos as melhores seguradoras do mercado e explicamos cada cláusula para que você saiba exatamente o que está contratando."
+      answer: "Nós não apenas vendemos apólices. Analisamos o risco, comparamos as melhores seguradoras do mercado e explicamos cada cláusula para que você saiba exatamente o que está contratando."
     },
     {
       question: "O que fazer em caso de sinistro?",
-      answer: "Você não está sozinho. Em caso de imprevisto, entre em contato conosco imediatamente. Nossa equipe técnica cuida de toda a burocracia e acompanhamento junto à seguradora para garantir sua indenização."
+      answer: "Você não está sozinho. Em caso de imprevisto, entre em contato conosco imediatamente. Nossa equipe técnica cuida de toda a burocracia e acompanhamento junto à seguradora para garantir sua indenização com agilidade."
     },
     {
       question: "O atendimento é apenas digital ou presencial?",
-      answer: "Atendemos de forma híbrida! Temos a agilidade do digital via WhatsApp e vídeo-chamada, mas também oferecemos consultoria presencial para casos específicos ou seguros empresariais complexos."
+      answer: "Atendemos de forma híbrida! Temos a agilidade do digital via WhatsApp e vídeo-chamada, mas também oferecemos consultoria presencial para casos específicos ou seguros empresariais."
     },
     {
       question: "Quais seguradoras são parceiras da Segure Aqui?",
-      answer: "Trabalhamos com as maiores e mais sólidas seguradoras do Brasil, como Porto Seguro, Azul, Liberty, SulAmérica, Bradesco e Tokyo Marine."
+      answer: "Trabalhamos com as maiores e mais sólidas seguradoras do Brasil, como Porto Seguro, Azul, Yelum, SulAmérica, Bradesco e Tokyo Marine."
     }
   ];
 
@@ -615,77 +543,35 @@ function FAQ() {
     </section>
   );
 }
-function Footer() {
+
+function CTASection() {
   return (
-    <footer id="contato" className="bg-primary text-primary-foreground">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-20 lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <h3 className="text-2xl font-light tracking-tight">
-            Vamos <span className="font-bold">conversar</span>.
-          </h3>
-          <p className="mt-4 max-w-sm text-sm text-white/70">
-            Estamos prontos para entender seu cenário e construir a proteção
-            ideal — sem letras miúdas.
+    <section className="bg-background py-24">
+      <div className="mx-auto max-w-5xl px-6">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-hero px-10 py-16 text-center text-primary-foreground shadow-elegant md:px-16">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full opacity-20 blur-3xl"
+            style={{ background: "radial-gradient(closest-side, white, transparent)" }}
+          />
+          <h2 className="text-3xl font-light tracking-tight md:text-4xl">
+            Pronto para uma <span className="font-bold">conversa</span>?
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-base text-white/75">
+            Rapidamente, traduzimos suas necessidades em um diagnóstico sob medida para você entender qual proteção é essencial hoje.
           </p>
-        </div>
-
-        <div className="lg:col-span-4">
-          <h4 className="text-xs font-semibold uppercase tracking-[0.25em] text-white/60">
-            Contato
-          </h4>
-          <ul className="mt-5 space-y-4 text-sm text-white/85">
-            <li className="flex items-center gap-3">
-              <Phone className="h-4 w-4 text-accent" />
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
-                (47) 99953-4266
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <Instagram className="h-4 w-4 text-accent" />
-              <a 
-                href="https://instagram.com/segure_aqui" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="hover:text-accent transition-colors"
-              >
-                @segure_aqui
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <Mail className="h-4 w-4 text-accent" />
-              <a href="mailto:contato@segureaqui.com.br" className="hover:text-accent transition-colors">
-                contato@segureaqui.com.br
-              </a>
-            </li>            
-          </ul>
-        </div>
-
-        <div className="lg:col-span-4">
-          <h4 className="text-xs font-semibold uppercase tracking-[0.25em] text-white/60">
-            Navegação
-          </h4>
-          <ul className="mt-5 space-y-3 text-sm text-white/85">
-            <li><a href="#servicos" className="hover:text-white">Seguros</a></li>
-            <li><a href="#diferencial" className="hover:text-white">Diferencial</a></li>
-            <li><a href="#depoimentos" className="hover:text-white">Depoimentos</a></li>
-            <li>
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="hover:text-white">
-                WhatsApp
-              </a>
-            </li>
-          </ul>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-10 inline-flex items-center gap-3 rounded-full bg-primary-foreground px-8 py-4 text-sm font-semibold text-primary transition hover:scale-[1.02]"
+          >
+            <MessageCircle className="h-5 w-5" />
+            Falar com um Consultor Agora
+          </a>
         </div>
       </div>
-
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 py-8 text-xs text-white/50 md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} Segure Aqui. Todos os direitos reservados. </p>
-          <div className="ml-auto">
-            <Logo className="text-primary-foreground" />
-          </div>
-        </div>
-      </div>
-    </footer>
+    </section>
   );
 }
 
@@ -698,37 +584,8 @@ function Index() {
       <Differential />
       <SocialProof />
       <FAQ />
-      <CTASection />
-      <Footer />
-
-      {/* Personagem do WhatsApp */}
-      {/* Personagem do WhatsApp - Sem fundo circular */}
-      <a
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Falar com nossa consultora"
-        className="fixed bottom-0 right-4 z-50 group flex flex-col items-center"
-      >
-        {/* Balão de fala melhorado */}
-        <span className="mb-2 scale-0 rounded-2xl bg-white px-4 py-2 text-xs font-bold text-primary shadow-2xl transition-all duration-300 group-hover:scale-100 group-hover:-translate-y-2">
-          Posso te ajudar? 🚀
-        </span>
-
-        <div className="relative w-32 md:w-40 transition-transform duration-300 hover:scale-105 active:scale-95">
-          {/* A imagem agora aparece inteira, alinhada ao fundo da tela */}
-          <img 
-            src="/je_6.png" 
-            alt="Consultora Segure Aqui" 
-            className="h-auto w-full object-contain"
-          />
-          
-          {/* Badge do WhatsApp flutuando ao lado da personagem */}
-          <div className="absolute bottom-10 right-0 flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg animate-bounce">
-            <MessageCircle className="h-6 w-6" />
-          </div>
-        </div>
-      </a>
+      <CTASection />   
+      
     </main>
   );
 }
