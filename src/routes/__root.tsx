@@ -2,7 +2,8 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import { CookieBanner } from "@/components/CookieBanner"
 import { MessageCircle } from "lucide-react";
 import { Header } from "@/components/Header"; 
-import { Footer } from "@/components/Footer"; 
+import { Footer } from "@/components/Footer";
+import { useEffect } from "react"; 
 
 import appCss from "../styles.css?url";
 
@@ -42,6 +43,16 @@ export const Route = createRootRoute({
         rel: "stylesheet",
         href: appCss,
       },
+      // Adicionando o Favicon aqui:
+      {
+        rel: "icon",
+        type: "image/png",
+        href: "/favicon.png?v=2",
+      },
+      {
+        rel: "apple-touch-icon",
+        href: "/favicon.png?v=2",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -65,7 +76,14 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const WHATSAPP_URL = "https://wa.me/5547999534266?text=Ol%C3%A1%21%20Quero%20falar%20com%20um%20consultor%20da%20Segure%20Aqui.";
-
+  useEffect(() => {
+    // Isso altera o Favicon dinamicamente via JavaScript
+    const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
+    link.type = 'image/svg';
+    link.rel = 'icon';
+    link.href = '/favicon.svg'; // Ele vai buscar na pasta public
+    document.getElementsByTagName('head')[0].appendChild(link);
+  }, []);
   return (
     <>
       <Header />
