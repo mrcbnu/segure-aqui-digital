@@ -8,6 +8,8 @@ export function Footer() {
     <footer id="contato" className="bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-20 lg:grid-cols-12">
         <div className="lg:col-span-4">
+          {/* Substituído para usar o componente Logo profissional */}
+          <Logo className="text-white mb-6" /> 
           <h3 className="text-2xl font-light tracking-tight">
             Vamos <span className="font-bold">conversar</span>.
           </h3>

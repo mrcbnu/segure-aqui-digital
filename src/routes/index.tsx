@@ -27,6 +27,23 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+// --- IMPORTAÇÃO DE ASSETS (BANNER) ---
+import banner1 from "../assets/banner/banner-1.png";
+import banner2 from "../assets/banner/banner-2.png";
+import banner3 from "../assets/banner/banner-3.png";
+import banner4 from "../assets/banner/banner-4.png";
+import banner5 from "../assets/banner/banner-5.png";
+import banner6 from "../assets/banner/banner-6.png";
+
+// --- IMPORTAÇÃO DE ASSETS (PARCEIROS) ---
+import logoPorto from "../assets/partners/porto.png";
+import logoBradesco from "../assets/partners/bradesco.png";
+import logoYelum from "../assets/partners/yelum.png";
+import logoSulamerica from "../assets/partners/sulamerica.png";
+import logoTokio from "../assets/partners/tokio.png";
+import logoAllianz from "../assets/partners/allianz.png";
+import logoHdi from "../assets/partners/hdi.png";
+
 const SITE_URL = "https://segureaqui.com.br";
 
 const localBusinessJsonLd = {
@@ -106,8 +123,7 @@ const WHATSAPP_URL =
 function Hero() {   
   
   // Lista das suas imagens (coloque os nomes corretos dos arquivos na pasta public)
-  const TOTAL_IMAGENS = 6;
-  const images = Array.from({ length: TOTAL_IMAGENS }, (_, i) => `/banner/banner-${i + 1}.png`);    
+  const images = [banner1, banner2, banner3, banner4, banner5, banner6];    
 
   const [currentImg, setCurrentImg] = React.useState(0);
 
@@ -247,13 +263,13 @@ function Hero() {
 
 function Partners() {
   const partners = [
-    { name: "Porto Seguro", logo: "/porto.png" },
-    { name: "Bradesco Seguros", logo: "/bradesco.png" },
-    { name: "Yelum", logo: "/yelum.png" },
-    { name: "SulAmérica", logo: "/sulamerica.png" },
-    { name: "Tokio Marine", logo: "/tokio.png" },
-    { name: "Allianz", logo: "/allianz.png" },
-    { name: "HDI", logo: "/hdi.png" },
+    { name: "Porto Seguro", logo: logoPorto },
+    { name: "Bradesco Seguros", logo: logoBradesco },
+    { name: "Yelum", logo: logoYelum },
+    { name: "SulAmérica", logo: logoSulamerica },
+    { name: "Tokio Marine", logo: logoTokio },
+    { name: "Allianz", logo: logoAllianz },
+    { name: "HDI", logo: logoHdi },
   ];
 
   return (

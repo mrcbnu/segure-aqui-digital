@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import logoImg from "../assets/logo.png"; // 1. Importamos a imagem como um módulo
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <img 
-        src="/logo.png" 
+        src={logoImg} // 2. Trocamos a string "/logo.png" pela variável importada
         alt="Segure Aqui Digital" 
         className="h-12 w-auto object-contain" 
       />

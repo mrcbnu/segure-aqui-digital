@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { useEffect } from "react"; 
 
 import appCss from "../styles.css?url";
+import mascoteImg from "../assets/atendente.png";
 
 function NotFoundComponent() {
   return (
@@ -34,25 +35,26 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      // SEO Básico
       { title: "Segure Aqui | Corretora de Seguros" },
-      { name: "description", content: "Tranquilidade é planejamento. Consultoria técnica em seguros." },
+      { name: "description", content: "Tecnologia para cotar. Gente de verdade para cuidar." },
+      
+      // Metadados para WhatsApp/Redes Sociais (Open Graph)
+      { property: "og:title", content: "Segure Aqui | Consultoria em Seguros" },
+      { property: "og:description", content: "Proteja o que é importante com quem entende de planejamento. Atendimento rápido e digital." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://segureaqui.com.br" }, // Substitui pela tua URL final
+      { property: "og:image", content: "https://segureaqui.com.br/og-image.png" }, // Imagem que aparece no link
+      
+      // Twitter
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Segure Aqui" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      // Adicionando o Favicon aqui:
-      {
-        rel: "icon",
-        type: "image/png",
-        href: "/favicon.png?v=2",
-      },
-      {
-        rel: "apple-touch-icon",
-        href: "/favicon.png?v=2",
-      },
+      { rel: "stylesheet", href: appCss },
+      // Favicon (A forma que o TanStack gosta)
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "apple-touch-icon", href: "/favicon.png" },
     ],
   }),
   shellComponent: RootShell,
@@ -79,9 +81,9 @@ function RootComponent() {
   useEffect(() => {
     // Isso altera o Favicon dinamicamente via JavaScript
     const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
-    link.type = 'image/svg';
+    link.type = 'image/png';
     link.rel = 'icon';
-    link.href = '/favicon.svg'; // Ele vai buscar na pasta public
+    link.href = '/favicon.png'; // Ele vai buscar na pasta public
     document.getElementsByTagName('head')[0].appendChild(link);
   }, []);
   return (
@@ -106,7 +108,7 @@ function RootComponent() {
 
         <div className="relative w-28 md:w-36 transition-transform duration-300 hover:scale-105 active:scale-95">
           <img 
-            src="/je_6.png" 
+            src={mascoteImg} // 2. Trocamos a string "/je_6.png" pela variável importada
             alt="Consultora Segure Aqui" 
             className="h-auto w-full object-contain"
           />
