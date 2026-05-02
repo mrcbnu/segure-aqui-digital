@@ -44,7 +44,7 @@ import logoTokio from "../assets/partners/tokio.png";
 import logoAllianz from "../assets/partners/allianz.png";
 import logoHdi from "../assets/partners/hdi.png";
 
-const SITE_URL = "https://segureaqui.com.br";
+const SITE_URL = "https://segureaqui.netlify.app/";
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
