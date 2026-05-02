@@ -1,16 +1,15 @@
-# Configurações de Construção (Build)
+# Configurações de Construção
 [build]
-  # O comando que o Netlify deve rodar para gerar o site
+  # Comando para transformar o código TanStack em site real
   command = "npm run build"
-  
-  # A pasta onde o site "vivo" reside após o build
+  # Pasta onde o site pronto "mora" (importante para TanStack Start)
   publish = "dist/client"
 
-# Regras de Redirecionamento (Para evitar o erro 404)
+# Regras de Redirecionamento (Evita o erro 404 ao atualizar a página)
 [[redirects]]
-  # Diz ao servidor: se o usuário pedir qualquer página (/*)
+  # Se o usuário acessar qualquer rota (/*)
   from = "/*"
-  # Entregue o index.html, e o TanStack Router cuidará do resto
+  # O servidor entrega o index.html e o React assume a navegação
   to = "/index.html"
-  # Status 200 significa "Sucesso", mantendo a URL correta no navegador
+  # Status 200 mantém a URL original no navegador do cliente
   status = 200
