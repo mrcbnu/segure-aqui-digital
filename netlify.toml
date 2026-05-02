@@ -1,0 +1,16 @@
+# Configurações de Construção (Build)
+[build]
+  # O comando que o Netlify deve rodar para gerar o site
+  command = "npm run build"
+  
+  # A pasta onde o site "vivo" reside após o build
+  publish = "dist/client"
+
+# Regras de Redirecionamento (Para evitar o erro 404)
+[[redirects]]
+  # Diz ao servidor: se o usuário pedir qualquer página (/*)
+  from = "/*"
+  # Entregue o index.html, e o TanStack Router cuidará do resto
+  to = "/index.html"
+  # Status 200 significa "Sucesso", mantendo a URL correta no navegador
+  status = 200
