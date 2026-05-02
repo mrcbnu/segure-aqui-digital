@@ -1,5 +1,6 @@
 import { Phone, Instagram, Mail } from "lucide-react";
 import { Logo } from "./Header";
+import { Link } from "@tanstack/react-router"; // Importado para navegação interna
 
 export function Footer() {
   const WHATSAPP_URL = "https://wa.me/5547999534266?text=Ol%C3%A1%21%20Quero%20falar%20com%20um%20consultor%20da%20Segure%20Aqui.";
@@ -7,8 +8,9 @@ export function Footer() {
   return (
     <footer id="contato" className="bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-20 lg:grid-cols-12">
+        
+        {/* Coluna 1: Logo e Chamada (Ocupa 4 de 12 colunas) */}
         <div className="lg:col-span-4">
-          {/* Substituído para usar o componente Logo profissional */}
           <Logo className="text-white mb-6" /> 
           <h3 className="text-2xl font-light tracking-tight">
             Vamos <span className="font-bold">conversar</span>.
@@ -18,6 +20,7 @@ export function Footer() {
           </p>
         </div>
 
+        {/* Coluna 2: Contato (Ocupa 4 de 12 colunas) */}
         <div className="lg:col-span-4">
           <h4 className="text-xs font-semibold uppercase tracking-[0.25em] text-white/60">Contato</h4>
           <ul className="mt-5 space-y-4 text-sm text-white/85">
@@ -34,10 +37,33 @@ export function Footer() {
               <a href="mailto:contato@segureaqui.com.br" className="hover:text-accent transition-colors">contato@segureaqui.com.br</a>
             </li>            
           </ul>
+        </div>        
+        
+        
+        {/* Coluna 3: Nossos Serviços (Nova Coluna - Ocupa 4 de 12 colunas) */}
+        <div className="lg:col-span-4">
+          <h4 className="text-xs font-semibold uppercase tracking-[0.25em] text-white/60">Nossos Serviços</h4>
+          <ul className="mt-5 space-y-4 text-sm text-white/85">
+            <li>
+              <Link to="/servicos/seguro-vida" className="hover:text-accent transition-colors">Seguro de Vida</Link>
+            </li>
+            <li>
+              <Link to="/servicos/seguro-auto" className="hover:text-accent transition-colors">Seguro Automóvel</Link>
+            </li>
+            <li>
+              <Link to="/servicos/seguro-residencial" className="hover:text-accent transition-colors">Seguro Residencial</Link>
+            </li>
+            <li>
+              <Link to="/servicos/seguro-empresarial" className="hover:text-accent transition-colors">Seguro Empresarial</Link>
+            </li>
+          </ul>
         </div>
+
+        
       </div>
+
       <div className="border-t border-white/10 px-6 py-8 text-center text-xs text-white/50">
-        © {new Date().getFullYear()} Segure Aqui.
+        © {new Date().getFullYear()} Segure Aqui. Desenvolvido por MRC 
       </div>
     </footer>
   );

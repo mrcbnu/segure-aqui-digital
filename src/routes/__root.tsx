@@ -1,9 +1,10 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { CookieBanner } from "@/components/CookieBanner"
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, X } from "lucide-react";
 import { Header } from "@/components/Header"; 
 import { Footer } from "@/components/Footer";
-import { useEffect } from "react"; 
+import { useEffect, useState } from "react";
+
 
 import appCss from "../styles.css?url";
 import mascoteImg from "../assets/atendente.png";
@@ -43,7 +44,7 @@ export const Route = createRootRoute({
       { property: "og:title", content: "Segure Aqui | Consultoria em Seguros" },
       { property: "og:description", content: "Proteja o que é importante com quem entende de planejamento. Atendimento rápido e digital." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://segureaqui.com.br" }, // Substitui pela tua URL final
+      { property: "og:url", content: "https://www.segureaqui.com.br" }, // Substitui pela tua URL final
       { property: "og:image", content: "https://segureaqui.com.br/og-image.png" }, // Imagem que aparece no link
       
       // Twitter
@@ -78,6 +79,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const WHATSAPP_URL = "https://wa.me/5547999534266?text=Ol%C3%A1%21%20Quero%20falar%20com%20um%20consultor%20da%20Segure%20Aqui.";
+
+  // LOGICA DE VISIBILIDADE: Estado para controlar se a atendente aparece ou some
+  const [atendenteVisivel, setAtendenteVisivel] = useState(true);
   useEffect(() => {
     // Isso altera o Favicon dinamicamente via JavaScript
     const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
@@ -97,23 +101,24 @@ function RootComponent() {
       {/* Mascote Global - Agora aparece em todas as páginas */}
       <a
         href={WHATSAPP_URL}
+        id="whatsapp-flutuante" // ID para controle de visibilidade
         target="_blank"
         rel="noreferrer"
         aria-label="Falar com nossa consultora"
         className="fixed bottom-0 right-4 z-[999] group flex flex-col items-center"
+
       >
         <span className="mb-2 scale-0 rounded-2xl bg-white px-4 py-2 text-[10px] font-bold text-primary shadow-2xl transition-all duration-300 group-hover:scale-100 group-hover:-translate-y-2">
           Posso te ajudar? 🚀
         </span>
 
-        <div className="relative w-28 md:w-36 transition-transform duration-300 hover:scale-105 active:scale-95">
+        <div className="relative w-20 md:w-20 transition-transform duration-300 hover:scale-105 active:scale-95">
           <img 
-            src={mascoteImg} // 2. Trocamos a string "/je_6.png" pela variável importada
-            alt="Consultora Segure Aqui" 
+            src={mascoteImg} 
             className="h-auto w-full object-contain"
           />
-          <div className="absolute bottom-8 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg animate-bounce">
-            <MessageCircle className="h-5 w-5" />
+          <div className="absolute bottom-8 right-0 flex h-7 w-7 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg animate-bounce">
+            <MessageCircle className="h-4 w-4" />
           </div>
         </div>
       </a>

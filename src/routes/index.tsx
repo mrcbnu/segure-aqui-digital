@@ -297,36 +297,42 @@ function Partners() {
 
 const services = [
   {
+    id: "seguro-auto",
     icon: Car,
     title: "Seguro Auto",
     blurb:
       "Proteção para o seu veículo sem complicações em caso de sinistro. Coberturas sob medida e assistência 24h.",
   },
   {
+    id: "seguro-vida",
     icon: HeartPulse,
     title: "Seguro de Vida",
     blurb:
       "Cuidado que acompanha você em todos os momentos.",
   },
   {
+    id: "seguro-residencial",
     icon: Home,
     title: "Seguro Residencial",
     blurb:
       "Sua casa protegida contra imprevistos, com coberturas personalizadas e assistência 24h.",
   },
   {
+    id: "seguro-empresarial",
     icon: Building2,
     title: "Seguro Empresarial",
     blurb:
       "Continuidade do seu negócio assegurada: patrimônio, responsabilidade civil e equipe sempre cobertos.",
   },
   {
+    id: "seguro-viagem",
     icon: Plane,
     title: "Seguro Viagem",
     blurb:
       "Viaje com tranquilidade sabendo que tem suporte médico e assistência completa em qualquer lugar do mundo.",
   },
   {
+    id: "seguro-condominio",
     icon: Building,
     title: "Seguro Condomínio",
     blurb:
@@ -352,27 +358,28 @@ function Services() {
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ icon: Icon, title, blurb }) => (
-            <article
-              key={title}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 transition duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-card"
+          {services.map(({ id, icon: Icon, title, blurb }) => (
+            <Link
+              key={id}
+              to="/servicos/$serviceId"
+              params={{ serviceId: id }}
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 transition duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-card cursor-pointer block"
             >
               <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-secondary text-accent transition group-hover:bg-accent group-hover:text-accent-foreground">
                 <Icon className="h-7 w-7" strokeWidth={1.6} />
               </div>
+              
               <h3 className="mt-6 text-xl font-semibold text-primary">{title}</h3>
+              
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {blurb}
               </p>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-accent opacity-0 transition group-hover:opacity-100"
-              >
-                Solicitar cotação →
-              </a>
-            </article>
+
+              {/* Mudamos o texto para "Ver detalhes" já que o card todo agora é um link */}
+              <div className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-accent opacity-0 transition group-hover:opacity-100">
+                Conhecer cobertura →
+              </div>
+            </Link>
           ))}
         </div>
       </div>
