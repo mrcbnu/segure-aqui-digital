@@ -1,19 +1,20 @@
+# 1. Configuração de Construção
 [build]
   command = "npm run build"
   publish = "dist/client"
 
-# Esta regra força o Netlify a redirecionar TUDO para o index.html
-# permitindo que o TanStack Router controle as páginas.
+# 2. Regras de Redirecionamento (Resolve 404 e conflitos de rota)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = true
+  force = true # Força o Netlify a sempre usar o seu index.html
 
+# 3. Cabeçalhos de Permissão (Resolve possíveis erros 401/Access Denied)
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    # Garante que o navegador não tente adivinhar o tipo de arquivo
+    Access-Control-Allow-Origin = "*"
+    X-Frame-Options = "ALLOWALL"
     X-Content-Type-Options = "nosniff"
+    Cache-Control = "public, max-age=0, must-revalidate"
