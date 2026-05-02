@@ -1,8 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import React, { useState, useEffect } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import ErrorBoundary from "../components/ErrorBoundary";
 import {
   Car,
   HeartPulse,
@@ -600,15 +600,17 @@ function CTASection() {
 
 function Index() {
   return (
-    <main className="min-h-screen bg-background font-sans text-foreground">
-      <Hero />      
-      <Partners />
-      <Services />      
-      <Differential />
-      <SocialProof />
-      <FAQ />
-      <CTASection />   
-      
-    </main>
+    <ErrorBoundary>
+      <main className="min-h-screen bg-background font-sans text-foreground">
+        <Hero />      
+        <Partners />
+        <Services />      
+        <Differential />
+        <SocialProof />
+        <FAQ />
+        <CTASection />   
+        
+      </main>
+    </ErrorBoundary >
   );
 }
