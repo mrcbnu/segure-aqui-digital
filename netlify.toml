@@ -1,15 +1,19 @@
-# Configurações de Construção
 [build]
-  # Comando para transformar o código TanStack em site real
   command = "npm run build"
-  # Pasta onde o site pronto "mora" (importante para TanStack Start)
   publish = "dist/client"
 
-# Regras de Redirecionamento (Evita o erro 404 ao atualizar a página)
+# Esta regra força o Netlify a redirecionar TUDO para o index.html
+# permitindo que o TanStack Router controle as páginas.
 [[redirects]]
-  # Se o usuário acessar qualquer rota (/*)
   from = "/*"
-  # O servidor entrega o index.html e o React assume a navegação
   to = "/index.html"
-  # Status 200 mantém a URL original no navegador do cliente
   status = 200
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    # Garante que o navegador não tente adivinhar o tipo de arquivo
+    X-Content-Type-Options = "nosniff"
