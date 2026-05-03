@@ -54,6 +54,7 @@ function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => vo
   );
 }
 
+
 export const getRouter = () => {
   const router = createRouter({
     routeTree,
@@ -65,3 +66,10 @@ export const getRouter = () => {
 
   return router;
 };
+
+// Ajuste da tipagem para o novo nome
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: ReturnType<typeof getRouter>
+  }
+}

@@ -1,8 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import React, { useState, useEffect } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
+
 import {
   Car,
   HeartPulse,
@@ -44,7 +44,7 @@ import logoTokio from "../assets/partners/tokio.png";
 import logoAllianz from "../assets/partners/allianz.png";
 import logoHdi from "../assets/partners/hdi.png";
 
-const SITE_URL = "https://segureaqui.com.br";
+const SITE_URL = "https://segureaqui.netlify.app/";
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
@@ -600,6 +600,7 @@ function CTASection() {
 
 function Index() {
   return (
+    
     <main className="min-h-screen bg-background font-sans text-foreground">
       <Hero />      
       <Partners />
@@ -610,5 +611,6 @@ function Index() {
       <CTASection />   
       
     </main>
+    
   );
 }
