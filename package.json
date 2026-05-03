@@ -42,14 +42,17 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/vite": "^4.2.1",
     "@tanstack/react-query": "^5.83.0",
+    "@tanstack/react-router": "^1.169.1",
     "@tanstack/react-start": "^1.167.14",
     "@tanstack/router-plugin": "^1.167.10",
+    "@tanstack/start": "^1.120.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
     "glob": "^13.0.6",
+    "h3": "^2.0.1-rc.21",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.575.0",
     "react": "^19.2.0",
@@ -63,13 +66,9 @@
     "tailwindcss": "^4.2.1",
     "tw-animate-css": "^1.3.4",
     "vaul": "^1.1.2",
+    "vinxi": "^0.5.11",
     "vite-tsconfig-paths": "^6.0.2",
-    "zod": "^3.24.2",
-    "@tanstack/react-router": "latest",
-    "@tanstack/start": "latest",
-    "h3": "latest",
-    "vinxi": "latest"
-
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
